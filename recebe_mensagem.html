@@ -3,7 +3,6 @@
 <head>
   <title>SPOTED - Apresentação das Mensagens</title>
   <style>
-    /* Estilize o tamanho e a posição da frase centralizada na tela */
     #messageContainer {
       position: absolute;
       top: 50%;
@@ -19,33 +18,20 @@
 
   <script>
     const messageContainer = document.getElementById('messageContainer');
-    let currentMessageIndex = 0;
-    let messages = []; // Array para armazenar as mensagens recebidas
+    const messages = ['Primeira mensagem', 'Segunda mensagem', 'Terceira mensagem'];
+    let currentIndex = 0;
+
+    function showMessage(message) {
+      messageContainer.textContent = message;
+    }
 
     function showNextMessage() {
-      if (messages.length === 0) {
-        messageContainer.textContent = "Sem mensagens no momento"; // Mensagem padrão quando não há mensagens disponíveis
-      } else {
-        const currentMessage = messages[currentMessageIndex];
-        messageContainer.textContent = currentMessage;
-
-        currentMessageIndex = (currentMessageIndex + 1) % messages.length; // Avança para a próxima mensagem circularmente
-      }
-
-      setTimeout(showNextMessage, 10000); // Chama a função novamente após 10 segundos
+      showMessage(messages[currentIndex]);
+      currentIndex = (currentIndex + 1) % messages.length;
     }
 
-    // Função para receber as mensagens do primeiro arquivo ("envia_mensagem")
-    function receiveMessage(message) {
-      messages.push(message);
-    }
-
-    // Exemplo: Simulando o recebimento de mensagens
-    receiveMessage("Primeira mensagem");
-    receiveMessage("Segunda mensagem");
-    receiveMessage("Terceira mensagem");
-
-    showNextMessage(); // Inicia a apresentação das mensagens
+    showNextMessage();
+    setInterval(showNextMessage, 10000);
   </script>
 </body>
 </html>
