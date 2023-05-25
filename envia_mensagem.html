@@ -21,25 +21,9 @@
       const message = messageInput.value.trim();
 
       if (message !== '') {
-        fetch('https://seu-servidor-web.com/recebe_mensagem', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ message: message })
-        })
-        .then(response => {
-          if (response.ok) {
-            alert('Mensagem enviada com sucesso!');
-            messageInput.value = '';
-          } else {
-            alert('Erro: não foi possível enviar a mensagem.');
-          }
-        })
-        .catch(error => {
-          alert('Erro: ocorreu um problema ao enviar a mensagem.');
-          console.error(error);
-        });
+        localStorage.setItem('message', message);
+        alert('Mensagem enviada com sucesso!');
+        messageInput.value = '';
       } else {
         alert('Por favor, digite uma mensagem antes de enviar.');
       }
